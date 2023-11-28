@@ -1,0 +1,18 @@
+.notification {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    background: rgb(168, 168, 168);
+    height: 40px;
+    font-size: 20px;
+    margin: 20px 0;
+    padding-left: 10px;
+}
+.success {
+    border: 3px solid green;
+    color: green;
+}
+.error {
+    border: 3px solid red;
+    color: red;
+}
