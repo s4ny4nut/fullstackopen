@@ -102,17 +102,17 @@ const App = () => {
         setNewNumber('');
       }
     } else {
-      axios
-        .post('http://localhost:3001/persons', newNameObj)
-        .then(response => {
-          setPersons(persons.concat(response.data));
+      personService
+        .create(newNameObj)
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson));
           setNewName('');
           setNewNumber('');
           setMessage(prevState => {
             return {
               ...prevState,
               isError: false,
-              text: `Added ${response.data.name}`
+              text: `Added ${returnedPerson.name}`
             }
           })
           setTimeout(() => {
