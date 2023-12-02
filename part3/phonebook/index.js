@@ -43,10 +43,6 @@ const generateId = () => {
   return Math.floor(Math.random() * 10000)
 }
 
-app.get("/", (request, response) => {
-  response.send("<h1>Persons</h1>")
-})
-
 
 app.get("/info", (request, response) => {
   const personsLength = persons.length;
