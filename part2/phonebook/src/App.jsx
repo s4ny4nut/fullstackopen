@@ -52,6 +52,7 @@ const App = () => {
     setFilterName(event.target.value);
   }
 
+
   const handleSubmitNewName = (event) => {
     event.preventDefault();
 
@@ -75,9 +76,9 @@ const App = () => {
 
       if(isConfirmedUpdate) {
         personService
-        .update(nameId, {...nameObj, number: newNumber})
-        .then(returnedPerson => {
-          setPersons(persons.map(person => person.id !== nameId ? person : returnedPerson))
+          .update(nameId, {...nameObj, number: newNumber})
+          .then(returnedPerson => {
+            setPersons(persons.map(person => person.id !== nameId ? person : returnedPerson))
         })
         .catch(error => {
           setPersons(persons.filter(person => person.id !== nameId))
@@ -85,7 +86,7 @@ const App = () => {
             return {
               ...prevState,
               isError: true,
-              text: `Information of ${nameObj.name} has already been removed from server`
+              text: error.response.data.error
             }
           })
           setTimeout(() => {
@@ -112,7 +113,25 @@ const App = () => {
             return {
               ...prevState,
               isError: false,
-              text: `Added ${returnedPerson.name}`
+              text: `Added ${returnedPerson.name} with number ${returnedPerson.number}`
+            }
+          })
+          setTimeout(() => {
+            setMessage(prevState => {
+              return {
+                ...prevState,
+                isError: null,
+                text: null
+              }
+            })
+          }, 3000)
+        })
+        .catch(error => {
+          setMessage(prevState => {
+            return {
+              ...prevState,
+              isError: true,
+              text: error.response.data.error
             }
           })
           setTimeout(() => {
